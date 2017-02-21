@@ -1,4 +1,4 @@
-service: ft-ig-editorial-slack-webhook
+service: ft-ig-editorial-newsfeed-webhook
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
