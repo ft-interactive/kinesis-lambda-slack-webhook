@@ -1,0 +1,23 @@
+service: ft-ig-editorial-slack-webhook
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  role: ${env:AWS_ROLE}
+  deploymentBucket: ${env:AWS_DEPLOYMENT_BUCKET}
+
+functions:
+  preprocess:
+    handler: handler.preprocess
+    events:
+      - stream:
+          arn: ${env:KINESIS_STREAM_ARN}
+          batchSize: 10
+          startingPosition: LATEST
+          enabled: true
+
+package:
+  exclude:
+    - node_modules/serverless/**
